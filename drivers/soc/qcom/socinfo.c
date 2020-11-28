@@ -1596,6 +1596,7 @@ int __init socinfo_init(void)
 {
 	static bool socinfo_init_done;
 	unsigned size;
+	uint32_t hw_type;
 
 	if (socinfo_init_done)
 		return 0;
@@ -1620,6 +1621,11 @@ int __init socinfo_init(void)
 	socinfo_print();
 	arch_read_hardware_id = msm_read_hardware_id;
 	socinfo_init_done = true;
+
+	hw_type = socinfo_get_platform_type();
+
+	printk("socinfo: The platform code is %d\n", hw_type);
+	printk("socinfo: The platform is %s\n", hw_platform[hw_type]);
 
 	return 0;
 }
